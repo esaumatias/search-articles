@@ -4,6 +4,7 @@ import AppContext from './AppContext';
 function AppProvider({ children }) {
   const [reloadPage ,setReloadPage] = useState(false);
   const [query, setQuery] = useState("");
+   const [listArticles, setListArticles] = useState([]);
 
   return (
     <AppContext.Provider
@@ -11,7 +12,9 @@ function AppProvider({ children }) {
         reloadPage,
         setReloadPage,
         query,
-        setQuery
+        setQuery,
+        listArticles,
+        setListArticles
       } }
     >
       { children }

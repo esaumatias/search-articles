@@ -1,11 +1,17 @@
-import React from 'react';
-import Button from 'react-bootstrap/Button';
-import Container from 'react-bootstrap/Container';
-import Form from 'react-bootstrap/Form';
-import Nav from 'react-bootstrap/Nav';
-import Navbar from 'react-bootstrap/Navbar';
+import React, { useContext } from 'react';
+import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
+import { getByArticles } from '../Service/RequestApi';
+import AppContext from '../Context/AppContext';
 
 function Header() {
+  const { query, setQuery, setListArticles } = useContext(AppContext);
+
+  const getArticles = async (query) => {
+    await getByArticles(query).then((response) =>
+      setListArticles(response.data)
+    );
+  };
+
   return (
     <Navbar bg="light" expand="lg">
       <Container fluid>
@@ -26,8 +32,9 @@ function Header() {
               placeholder="Search"
               className="me-2"
               aria-label="Search"
+              onChange={ ({ target }) => setQuery(target.value) }
             />
-            <Button variant="outline-success">Search</Button>
+            <Button variant="outline-success" onClick={ () => getArticles(query) }>Procurar</Button>
           </Form>
         </Navbar.Collapse>
       </Container>

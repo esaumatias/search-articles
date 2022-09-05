@@ -1,19 +1,9 @@
-import React, { useEffect, useState } from 'react';
+import React, { useContext } from 'react';
 import Table from 'react-bootstrap/Table';
-import { getByArticles } from '../Service/RequestApi';
+import AppContext from '../Context/AppContext';
 
 function TableArticles() {
-  const [listArticles, setListArticles] = useState([]);
-
-  const getArticles = async () => {
-    await getByArticles().then((response) =>
-      setListArticles(response.data)
-    );
-  };
-
-  useEffect(() => {
-    getArticles();
-  }, [ ]);
+  const { listArticles } = useContext(AppContext);
 
   return (
     <Table striped bordered hover>
