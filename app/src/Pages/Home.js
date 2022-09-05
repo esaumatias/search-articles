@@ -1,8 +1,12 @@
 import React from 'react';
+import { Container } from 'react-bootstrap';
+import TableArticles from '../Components/TableArticles';
 
 function Home() {
   return (
-    <h1>Home</h1>
+    <Container>
+      <TableArticles />
+    </Container>
   )
 }
 
