@@ -5,6 +5,7 @@ function AppProvider({ children }) {
   const [reloadPage ,setReloadPage] = useState(false);
   const [query, setQuery] = useState("");
    const [listArticles, setListArticles] = useState([]);
+   const [isChecked, setIsChecked] = useState([]);
 
   return (
     <AppContext.Provider
@@ -14,7 +15,9 @@ function AppProvider({ children }) {
         query,
         setQuery,
         listArticles,
-        setListArticles
+        setListArticles,
+        isChecked,
+        setIsChecked
       } }
     >
       { children }

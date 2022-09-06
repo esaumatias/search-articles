@@ -7,6 +7,7 @@ function Header() {
   const { query, setQuery, setListArticles } = useContext(AppContext);
 
   const getArticles = async (query) => {
+    setListArticles([]);
     await getByArticles(query).then((response) =>
       setListArticles(response.data)
     );
