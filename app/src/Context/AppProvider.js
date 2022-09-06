@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import AppContext from './AppContext';
 
 function AppProvider({ children }) {
@@ -6,6 +6,10 @@ function AppProvider({ children }) {
   const [query, setQuery] = useState("");
    const [listArticles, setListArticles] = useState([]);
    const [isChecked, setIsChecked] = useState([]);
+
+   useEffect(() => {
+    setReloadPage(false);
+  }, [reloadPage]);
 
   return (
     <AppContext.Provider

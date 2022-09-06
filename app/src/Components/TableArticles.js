@@ -6,23 +6,21 @@ import Favorite from '@mui/icons-material/Favorite';
 import AppContext from '../Context/AppContext';
 
 function TableArticles() {
-  const { listArticles, isChecked, setIsChecked } = useContext(AppContext);
+  const { listArticles, isChecked, setIsChecked, setReloadPage } = useContext(AppContext);
   // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   function setIfIsFavorite(article) {
     const { title, authors, description, urls } = article._source;
     const articles = { title, authors, description, urls };
-    const verifica = isChecked.find((value) => value.title === title);
-
+    const verifica = isChecked.some((value) => value.title === title);
+    
     if (verifica) {
-      const index = isChecked.map(e => e.title).indexOf(title);
-      const newList = isChecked.splice(index, 1);
+      const newList = isChecked.filter((value) => (value.title !== title));
       setIsChecked(newList)
-    } else {
+    } else if (!verifica)  {
       setIsChecked([...isChecked, articles]);
     }
-
-    console.log(isChecked);
+    setReloadPage(true);
   }
 
   return (
@@ -37,28 +35,39 @@ function TableArticles() {
         </tr>
       </thead>
       <tbody>
-        {listArticles ? (
-          listArticles.map((article, index) => (
-            <tr key={index}>
-              <td>{ index + 1}</td>
-              <td>
-                {article._source.authors.map((author) => (
-                  `${author}, `
-                ))}
-              </td>
-              <td>{ article._source.title }</td>
-              <td>{ article._source.description }</td>
-              <td>
-                <a href={ article._source.urls } target="_blank" rel="noreferrer">link</a>
-              </td>
-              <td>
-              <div>
-                <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} onChange={() => setIfIsFavorite(article)} checked={isChecked.find((values) => values.title === article._source.title)}/>
-              </div>
-              </td>
-            </tr>
-          ))
-        ) : null}
+        {listArticles
+          ? listArticles.map((article, index) => (
+              <tr key={index}>
+                <td>{index + 1}</td>
+                <td>
+                  {article._source.authors.map((author) => `${author}, `)}
+                </td>
+                <td>{article._source.title}</td>
+                <td>{article._source.description}</td>
+                <td>
+                  <a
+                    href={article._source.urls}
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    link
+                  </a>
+                </td>
+                <td>
+                  <div>
+                    <Checkbox
+                      icon={<FavoriteBorder />}
+                      checkedIcon={<Favorite />}
+                      onChange={() => setIfIsFavorite(article)}
+                      checked={ isChecked.find(
+                        (values) => values.title === article._source.title ? true : false
+                      ) }
+                    />
+                  </div>
+                </td>
+              </tr>
+            ))
+          : null}
       </tbody>
     </Table>
   );

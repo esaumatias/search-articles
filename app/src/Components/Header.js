@@ -1,7 +1,9 @@
 import React, { useContext } from 'react';
-import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
-import { getByArticles } from '../Service/RequestApi';
 import AppContext from '../Context/AppContext';
+import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
+import { getByArticles } from '../Service/RequestApi';
+
 
 function Header() {
   const { query, setQuery, setListArticles } = useContext(AppContext);
@@ -25,7 +27,7 @@ function Header() {
             navbarScroll
           >
             <Nav.Link href="#action1">Home</Nav.Link>
-            <Nav.Link href="#action2">Favorites</Nav.Link>
+            <Link to="/Favorites">Favorites</Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control
