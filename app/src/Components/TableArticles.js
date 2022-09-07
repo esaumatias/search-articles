@@ -7,21 +7,22 @@ import AppContext from '../Context/AppContext';
 
 function TableArticles() {
   const { listArticles, isChecked, setIsChecked, setReloadPage } = useContext(AppContext);
-  // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
   function setIfIsFavorite(article) {
     const { title, authors, description, urls } = article._source;
     const articles = { title, authors, description, urls };
-    const verifica = isChecked.some((value) => value.title === title);
+    const checkEquality = isChecked.some((value) => value.title === title);
     
-    if (verifica) {
+    if (checkEquality) {
       const newList = isChecked.filter((value) => (value.title !== title));
       setIsChecked(newList)
-    } else if (!verifica)  {
+    } else if (!checkEquality)  {
       setIsChecked([...isChecked, articles]);
     }
     setReloadPage(true);
   }
+
+  const checkIfIsFavorite = (title) => (isChecked.some((values) => values.title === title));
 
   return (
     <Table striped bordered hover>
@@ -59,9 +60,7 @@ function TableArticles() {
                       icon={<FavoriteBorder />}
                       checkedIcon={<Favorite />}
                       onChange={() => setIfIsFavorite(article)}
-                      checked={ isChecked.find(
-                        (values) => values.title === article._source.title ? true : false
-                      ) }
+                      checked={ checkIfIsFavorite(article._source.title) }
                     />
                   </div>
                 </td>
