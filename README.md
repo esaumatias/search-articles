@@ -22,8 +22,8 @@ npm install
 5) abra `http://localhost:3000` em seu navegador
 
 ## Screenshots:
-![Home Page](/src/Screenshots/home.png)
-![Favorites Page](/src/Screenshots/favorites.png)
+![Home Page](/app/src/Screenshots/home.png)
+![Favorites Page](/app/src/Screenshots/favorites.png)
 
 ## Tecnologias/Dependências:
 
