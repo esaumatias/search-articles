@@ -8,6 +8,11 @@ function AppProvider({ children }) {
    const [isChecked, setIsChecked] = useState([]);
 
    useEffect(() => {
+    const storedArticles = localStorage.getItem("articles");
+    setIsChecked(JSON.parse(storedArticles));
+   }, [])
+
+   useEffect(() => {
     setReloadPage(false);
   }, [reloadPage]);
 

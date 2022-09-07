@@ -10,17 +10,11 @@ import Header from '../Components/Header';
 function Favorites() {
   const { isChecked, setIsChecked, setReloadPage } = useContext(AppContext);
 
-  function setIfIsFavorite(article) {
-    const { title, authors, description, urls } = article;
-    const articles = { title, authors, description, urls };
-    const checkEquality = isChecked.some((value) => value.title === title);
-
-    if (checkEquality) {
-      const newList = isChecked.filter((value) => (value.title !== title));
-      setIsChecked(newList)
-    } else if (!checkEquality) {
-      setIsChecked([...isChecked, articles]);
-    }
+  function removeFavorite(article) {
+    const { title } = article;
+    const newList = isChecked.filter((value) => (value.title !== title));
+    setIsChecked(newList)
+    localStorage.setItem("articles",JSON.stringify(newList));
     setReloadPage(true);
   }
 
@@ -55,7 +49,7 @@ function Favorites() {
                   </td>
                   <td>
                   <div>
-                    <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} onChange={() => setIfIsFavorite(article)} checked={true}/>
+                    <Checkbox icon={<FavoriteBorder />} checkedIcon={<Favorite />} onChange={() => removeFavorite(article)} checked={true}/>
                   </div>
                   </td>
                 </tr>

@@ -16,8 +16,10 @@ function TableArticles() {
     if (checkEquality) {
       const newList = isChecked.filter((value) => (value.title !== title));
       setIsChecked(newList)
+      localStorage.setItem("articles",JSON.stringify(newList));
     } else if (!checkEquality)  {
       setIsChecked([...isChecked, articles]);
+      localStorage.setItem("articles",JSON.stringify([...isChecked, articles]));
     }
     setReloadPage(true);
   }
