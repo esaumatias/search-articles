@@ -1,7 +1,6 @@
 import React, { useContext } from 'react';
 import AppContext from '../Context/AppContext';
 import { Button, Container, Form, Nav, Navbar } from 'react-bootstrap';
-import { Link } from 'react-router-dom';
 import { getByArticles } from '../Service/RequestApi';
 
 
@@ -10,7 +9,7 @@ function Header() {
 
   const getArticles = async (query) => {
     setListArticles([]);
-    await getByArticles(query).then((response) =>
+    await getByArticles(query, 1).then((response) =>
       setListArticles(response.data)
     );
   };
@@ -26,12 +25,8 @@ function Header() {
             style={{ maxHeight: '100px' }}
             navbarScroll
           >
-            <Link to="/">
-              <Nav.Link href="#action1">Home</Nav.Link>
-            </Link>
-            <Link to="/Favorites">
-              <Nav.Link href="#action2">Favorites</Nav.Link>
-            </Link>
+            <Nav.Link href="/">Home</Nav.Link>
+            <Nav.Link href="/Favorites">Favorites</Nav.Link>
           </Nav>
           <Form className="d-flex">
             <Form.Control

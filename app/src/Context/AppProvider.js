@@ -26,7 +26,7 @@ function AppProvider({ children }) {
         listArticles,
         setListArticles,
         isChecked,
-        setIsChecked
+        setIsChecked,
       } }
     >
       { children }
