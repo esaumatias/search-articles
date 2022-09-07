@@ -11,8 +11,8 @@ function Favorites() {
   const { isChecked, setIsChecked, setReloadPage } = useContext(AppContext);
 
   function removeFavorite(article) {
-    const { title } = article;
-    const newList = isChecked.filter((value) => (value.title !== title));
+    const { id } = article;
+    const newList = isChecked.filter((value) => (value.id !== id));
     setIsChecked(newList)
     localStorage.setItem("articles",JSON.stringify(newList));
     setReloadPage(true);

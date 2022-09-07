@@ -5,13 +5,14 @@ import { getByArticles } from '../Service/RequestApi';
 
 
 function Header() {
-  const { query, setQuery, setListArticles } = useContext(AppContext);
+  const { query, setQuery, setListArticles, setReloadPage } = useContext(AppContext);
 
   const getArticles = async (query) => {
     setListArticles([]);
     await getByArticles(query, 1).then((response) =>
       setListArticles(response.data)
     );
+    setReloadPage(true);
   };
 
   return (

@@ -10,11 +10,11 @@ function TableArticles() {
 
   function setIfIsFavorite(article) {
     const { title, authors, description, urls } = article._source;
-    const articles = { title, authors, description, urls };
-    const checkEquality = isChecked.some((value) => value.title === title);
+    const articles = { title, authors, description, urls, id: article._id };
+    const checkEquality = isChecked.some((value) => value.id === article._id);
     
     if (checkEquality) {
-      const newList = isChecked.filter((value) => (value.title !== title));
+      const newList = isChecked.filter((value) => (value.id !== article._id));
       setIsChecked(newList)
       localStorage.setItem("articles",JSON.stringify(newList));
     } else if (!checkEquality)  {
@@ -24,13 +24,12 @@ function TableArticles() {
     setReloadPage(true);
   }
 
-  const checkIfIsFavorite = (title) => (isChecked.some((values) => values.title === title));
+  const checkIfIsFavorite = (id) => (isChecked.some((values) => values.id === id));
 
   return (
     <Table striped bordered hover>
       <thead>
         <tr>
-          <th>#</th>
           <th>authors</th>
           <th>title</th>
           <th>description</th>
@@ -41,7 +40,6 @@ function TableArticles() {
         {listArticles
           ? listArticles.map((article, index) => (
               <tr key={index}>
-                <td>{index + 1}</td>
                 <td>
                   {article._source.authors.map((author) => `${author}, `)}
                 </td>
@@ -62,7 +60,7 @@ function TableArticles() {
                       icon={<FavoriteBorder />}
                       checkedIcon={<Favorite />}
                       onChange={() => setIfIsFavorite(article)}
-                      checked={ checkIfIsFavorite(article._source.title) }
+                      checked={ checkIfIsFavorite(article._id) }
                     />
                   </div>
                 </td>
