@@ -3,6 +3,8 @@
 Implementa uma aplicação utilizando React JS, que oferece uma interface web com as seguintes funcionalidades:
 nela é possível buscar por artigos científicos na API do portal CORE e exibe a mesma, nela é possível marcar/desmarcar os resultados da pesquisa como favorito, e tem uma listagem com os artigos favoritados, os artigos favoritados estão disponíveis mesmo que a janela do navegador seja fechada e aberta novamente e as listagens tem paginação.
 
+## DEPLOY DA APLICAÇÃO: https://search-article.vercel.app/
+
 ## Como executar o aplicativo:
 
 1) Clone o repositório: `git clone git@github.com:esaumatias/search-articles.git`
