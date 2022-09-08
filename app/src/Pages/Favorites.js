@@ -33,14 +33,12 @@ function Favorites() {
             </tr>
           </thead>
           <tbody>
-            {isChecked ? (
+            {isChecked.length > 0 ? (
               isChecked.map((article, index) => (
                 <tr key={index}>
                   <td>{ index + 1}</td>
                   <td>
-                    {article.authors.map((author) => (
-                      `${author}, `
-                    ))}
+                    {article.authors}
                   </td>
                   <td>{ article.title }</td>
                   <td>{ article.description }</td>
