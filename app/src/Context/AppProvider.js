@@ -9,7 +9,7 @@ function AppProvider({ children }) {
 
    useEffect(() => {
     const storedArticles = localStorage.getItem("articles");
-    setIsChecked(JSON.parse(storedArticles));
+    storedArticles ? setIsChecked(JSON.parse(storedArticles)) : setIsChecked(['']);
    }, [])
 
    useEffect(() => {
